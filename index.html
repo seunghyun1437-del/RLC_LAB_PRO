@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RLC Lab Pro</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="container">
+    <h1>RLC Lab Pro</h1>
+  </header>
+
+  <main class="container grid">
+    <section class="card" id="card-params">
+      <h2>파라미터</h2>
+      <div class="form-row">
+        <label for="rInput">R (Ω)</label>
+        <input id="rInput" type="number" inputmode="decimal" step="any" placeholder="예: 100" />
+      </div>
+      <div class="form-row">
+        <label for="lInput">L (H)</label>
+        <input id="lInput" type="number" inputmode="decimal" step="any" placeholder="예: 0.01" />
+      </div>
+      <div class="form-row">
+        <label for="cInput">C (F)</label>
+        <input id="cInput" type="number" inputmode="decimal" step="any" placeholder="예: 0.000001" />
+      </div>
+      <div class="form-row">
+        <label for="fInput">f (Hz)</label>
+        <input id="fInput" type="number" inputmode="decimal" step="any" placeholder="예: 1000" />
+      </div>
+      <div class="form-row">
+        <label for="vinInput">Vin [V]</label>
+        <input id="vinInput" type="number" inputmode="decimal" step="any" placeholder="예: 1.0" />
+      </div>
+      <div class="buttons">
+        <button id="btnCalc">계산하기</button>
+        <button id="btnReset" class="ghost">리셋</button>
+      </div>
+      <p id="inlineError" class="error" aria-live="polite"></p>
+    </section>
+
+    <section class="card" id="card-results">
+      <h2>결과</h2>
+      <div class="results">
+        <div><span class="k">f0 (Resonant Frequency)</span>: <span id="f0Out">-</span> Hz</div>
+        <div><span class="k">XL (Inductive Reactance)</span>: <span id="xlOut">-</span> Ω</div>
+        <div><span class="k">XC (Capacitive Reactance)</span>: <span id="xcOut">-</span> Ω</div>
+        <div><span class="k">|Z| (Impedance Magnitude)</span>: <span id="zmagOut">-</span> Ω</div>
+        <div><span class="k">Q (Quality Factor)</span>: <span id="qOut">-</span></div>
+        <div><span class="k">BW (Bandwidth)</span>: <span id="bwOut">-</span> Hz</div>
+        <div><span class="k">ζ (Damping Ratio)</span>: <span id="zetaOut">-</span></div>
+      </div>
+      <div id="qBadge" class="badge">Q badge</div>
+      <p id="quickNote" class="hint"></p>
+    </section>
+
+    <section class="card" id="card-plot">
+      <h2>|Z| vs f (log x-axis)</h2>
+      <div class="buttons small">
+        <button id="toggleZ" class="active">|Z|</button>
+        <button id="toggleI" class="ghost">|I|</button>
+      </div>
+      <div class="buttons small">
+        <button id="btnSavePNG">🖼️ 그래프 PNG 저장</button>
+      </div>
+      <div class="form-row" style="margin-top:6px">
+        <label style="display:flex; align-items:center; gap:8px; cursor:pointer">
+          <input id="toggleBW" type="checkbox" checked />
+          BW 음영 표시 (f1–f2)
+        </label>
+      </div>
+      <p id="bwNote" class="hint"></p>
+      <canvas id="zChart" height="180"></canvas>
+    </section>
+  </main>
+
+  <footer class="container foot">브라우저에서만 동작 · 데이터 저장 없음</footer>
+
+  <script src="js/utils.js"></script>
+  <script src="js/math-core.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      window.App.init();
+    });
+  </script>
+</body>
+</html>
+
+
